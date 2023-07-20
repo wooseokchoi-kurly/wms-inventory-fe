@@ -1,10 +1,15 @@
-body {
-    margin: 0;
-    padding: 0;
+.wrap-container {
+    height: auto;
+    min-height: 100%;
+    padding-bootom: 60px; /*footer의 높이*/
+}
+
+.home-container {
+    min-height: 600px;
 }
 
 footer {
-    height: 60px;
+    height: 60px; /*footer의 높이*/
     position: relative;
     transform: translateY(0%);
     border-top:1px solid #248efe;
