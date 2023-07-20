@@ -56,7 +56,7 @@ export default function InventoryAppBar() {
       setDrawerState(value);
     };
 
-  const toggleState = (menuCode: string) => {
+  const toggleListItemOpenState = (menuCode: string) => {
     const map = new Map<string, boolean>(listItemOpenState.entries());
     map.set(menuCode, !map.get(menuCode));
 
@@ -149,34 +149,33 @@ export default function InventoryAppBar() {
           {menuData != null &&
             menuData.map((data: ListObject) => {
               return (
-                <>
-                  <List key={data.id}>
+                <div key={data.id}>
+                  <List>
                     <ListItemButton
                       onClick={() => {
-                        toggleState(data.code);
-                        return listItemOpenState?.get(data.code);
+                        toggleListItemOpenState(data.code);
+                        return listItemOpenState.get(data.code);
                       }}
                     >
                       <ListItemIcon>
                         <InboxIcon />
                       </ListItemIcon>
                       <ListItemText primary={data.name} />
-                      {listItemOpenState?.get(data.code) ? (
+                      {listItemOpenState.get(data.code) ? (
                         <ExpandLess />
                       ) : (
                         <ExpandMore />
                       )}
                     </ListItemButton>
                     <Collapse
-                      in={listItemOpenState?.get(data.code)}
+                      in={listItemOpenState.get(data.code)}
                       timeout="auto"
                       unmountOnExit
-                      key={data.id}
                     >
                       {data.listItem.map((item: ListItemObject) => {
                         return (
-                          <>
-                            <List component="div" disablePadding key={item.id}>
+                          <div key={item.id}>
+                            <List component="div" disablePadding>
                               <ListItemButton
                                 sx={{ pl: 4 }}
                                 onClick={() => {
@@ -192,12 +191,12 @@ export default function InventoryAppBar() {
                                 <ListItemText primary={item.name} />
                               </ListItemButton>
                             </List>
-                          </>
+                          </div>
                         );
                       })}
                     </Collapse>
                   </List>
-                </>
+                </div>
               );
             })}
         </Box>
